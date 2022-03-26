@@ -4,7 +4,7 @@
 #
 # Intall Docker and Docker-compose on Linux SO
 #
-# @version 1.0.3
+# @version 1.0.4
 # @license MIT License
 #
 # Copyright (c) 2022 Taylor Lopes <taylorlopes@gmail.com>
@@ -87,6 +87,7 @@ if [[ $ARG == 'd' ]]
 then
     echo -e '\n\033[1m- Instalando a versao atual do Docker \033[0m'
     sudo apt update
+    sudo apt install curl -y
     curl -fsSL https://get.docker.com | sh
     echo -e '  Ok'; 
 
