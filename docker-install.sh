@@ -4,7 +4,7 @@
 #
 # Intall Docker and Docker-compose on Linux SO
 #
-# @version 1.0.4
+# @version 1.0.5
 # @license MIT License
 #
 # Copyright (c) 2022 Taylor Lopes <taylorlopes@gmail.com>
@@ -37,9 +37,20 @@ while getopts 'dh' opt; do
       ARG='d'
       ;;
     ?|h)
-      echo -e "\n\033[1mModo de uso:\033[0m ./$(basename $0) [-d] [-h]"
+      echo -e "\n\033[1mEste script tem por finalidade: \033[0m" 
+      echo -e "- Instalar a versao atual do Docker em SO Linux"
+      echo -e "- Adicionar o usuario corrente ao grupo Docker"
+      echo -e "- Inicializar o daemon Docker"
+      echo -e "- Instalar o Docker-compose"
+      echo -e "- Exibir a versao instalada do Docker/Compose\n"         
+      echo -e "\033[1mModo de uso:\033[0m ./$(basename $0) [-d] [-h]"
       echo -e "[-d] Debug: exibe detalhes do processamento"
       echo -e "[-h] Ajuda: exibe ajuda\n"
+      echo -e "\033[1mObservacoes importantes: \033[0m"
+      echo -e "- Compativel com distribuicoes Linux Debian e variantes"
+      echo -e "- O usuario corrente deve ter privilegios sudo"
+      echo -e "- Pode ser necessario remover instalacoes antigas"
+      echo -e "- Ao finalizar, recomenda-se logout/login\n"
       exit 1
       ;;
   esac
@@ -53,21 +64,8 @@ echo -e "
  | |_| | (_) | (__|   <  __/ |   
  |____/ \___/ \___|_|\_\___|_|   
 
-\033[1m  Este script tem por finalidade: \033[0m 
-- Instalar a versao atual do Docker em SO Linux
-- Adicionar o usuario corrente ao grupo Docker
-- Inicializar o daemon Docker
-- Instalar o Docker-compose
-- Exibir a versao instalada do Docker/Compose
-"
-
-echo -e "\033[1m  Observacoes importantes: \033[0m
-- Compativel com distribuicoes Linux Debian e variantes
-- O usuario corrente deve ter privilegios sudo 
-- Pode ser necessario remover instalacoes antigas
-- Ao finalizar, recomenda-se logout/login
-- Para ajuda, execute ./$(basename $0) -h
-"  
+  Instala o Docker e Docker-compose em SO Linux
+  Para ajuda, execute ./$(basename $0) -h\n"
 
 # Execution confirmation 
 read -r -p "Deseja continuar? [s/N] " REPLY
@@ -140,4 +138,4 @@ fi
 # Show versions
 echo -e '\n\033[1m- Exibindo a versao instalada do Docker/Compose \033[0m'
 echo ' ' `docker -v`
-echo ' ' `docker-compose --version` 
+echo ' ' `docker-compose --version`
