@@ -62,7 +62,7 @@ echo -e "
 "
 
 echo -e "\033[1m  Observacoes importantes: \033[0m
-- Compativel com distribuioes Linux Debian e variantes
+- Compativel com distribuicoes Linux Debian e variantes
 - O usuario corrente deve ter privilegios sudo 
 - Pode ser necessario remover instalacoes antigas
 - Ao finalizar, recomenda-se logout/login
