@@ -50,7 +50,7 @@ while getopts 'dh' opt; do
       echo -e "- Compativel com distribuicoes Linux Debian e variantes"
       echo -e "- O usuario corrente deve ter privilegios sudo"
       echo -e "- Pode ser necessario remover instalacoes antigas"
-      echo -e "- Ao finalizar, recomenda-se logout/login\n"
+      echo -e "- Ao finalizar, reiniciar ou fazer logout/login\n"
       exit 1
       ;;
   esac
@@ -68,10 +68,10 @@ echo -e "
   Para ajuda, execute ./$(basename $0) -h\n"
 
 # Execution confirmation 
-read -r -p "Deseja continuar? [s/N] " REPLY
+read -r -p "  Deseja continuar? [s/N] " REPLY
 if ! [[ "$REPLY" =~ ^([sS][eE][sS]|[sS])$ ]]
 then
-    echo -e 'Execucao do script abortada pelo usuario'
+    echo -e "  Script finalizado pelo usuario\n"
     exit 1
 fi
  
@@ -87,55 +87,62 @@ then
     sudo apt update
     sudo apt install curl -y
     curl -fsSL https://get.docker.com | sh
-    echo -e '  Ok'; 
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Adicionando o usuario corrente ao grupo Docker \033[0m'
     sleep 2
     sudo groupadd docker 
     sudo usermod -aG docker $USER
-    echo -e '  Ok'; 
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Inicializando o daemon Docker \033[0m'
     sleep 2 
     sudo systemctl start docker 
-    echo -e '  Ok'; 
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Instalando o Docker-compose \033[0m'
     sleep 2 
     sudo apt install docker-compose -y
-    echo -e '  Ok'; 
+    echo -e '  Ok'
 
 # If DEBUG is OFF
 else 
     echo -e '\n\033[1m- Instalando a versao atual do Docker \033[0m'
     loading & {
-    sleep 2
-    sudo apt update
-    sudo apt install curl -y
-    curl -fsSL https://get.docker.com | sh
-    } &>/dev/null; echo -e '  Ok'; kill "$!"
+      sleep 2
+      sudo apt update
+      sudo apt install curl -y
+      curl -fsSL https://get.docker.com | sh
+    } &>/dev/null; kill "$!"
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Adicionando o usuario corrente ao grupo Docker \033[0m'
     loading & {
-    sleep 2
-    sudo groupadd docker 
-    sudo usermod -aG docker $USER
-    } &>/dev/null; echo -e '  Ok'; kill "$!"
+      sleep 2
+      sudo groupadd docker 
+      sudo usermod -aG docker $USER
+    } &>/dev/null; kill "$!"
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Inicializando o daemon Docker \033[0m'
     loading & {
-    sleep 2 
-    sudo systemctl start docker 
-    } &>/dev/null; echo -e '  Ok'; kill "$!"
+      sleep 2 
+      sudo systemctl start docker 
+    } &>/dev/null; kill "$!"
+    echo -e '  Ok'
 
     echo -e '\n\033[1m- Instalando o Docker-compose \033[0m'
     loading & {
-    sleep 2 
-    sudo apt install docker-compose -y
-    } &>/dev/null; echo -e '  Ok'; kill "$!"
+      sleep 2 
+      sudo apt install docker-compose -y
+    } &>/dev/null; kill "$!"
+    echo -e '  Ok'
+
 fi
 
 # Show versions
 echo -e '\n\033[1m- Exibindo a versao instalada do Docker/Compose \033[0m'
-echo ' ' `docker -v`
-echo ' ' `docker-compose --version`
+echo -e ' ' `docker -v`
+echo -e ' ' `docker-compose --version`
+echo -e ''
+echo -e 'IMPORTANTE: reiniciar ou fazer login/logout para aplicar as mudancas\n'
