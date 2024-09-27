@@ -14,4 +14,7 @@ chmod +x docker-install.sh
 ./docker-install.sh
 </code>
 
-**Observação:** NÃO EXECUTE COM SUDO, pois o script irá adicionar o usuário corrente ao grupo docker.
+
+### Observação
+
+NÃO EXECUTE COM SUDO, pois o script irá adicionar o usuário corrente ao grupo docker.
